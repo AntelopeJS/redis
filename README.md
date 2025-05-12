@@ -8,16 +8,25 @@
 
 A Redis client module that implements the Redis and Redis Scheduler interfaces for AntelopeJS.
 
-For detailed documentation on the Redis interfaces, please refer to:
-
-- [Redis Interface](https://github.com/AntelopeJS/interface-redis)
-- [Redis Scheduler Interface](https://github.com/AntelopeJS/interface-redis-scheduler)
-
 ## Installation
 
 ```bash
 ajs project modules add @antelopejs/redis
 ```
+
+## Interfaces
+
+This module implements two key interfaces:
+
+- **Redis Interface**: Promise-based Redis client with key-value operations and pub/sub messaging.
+- **Redis Scheduler Interface**: Redis-based distributed task scheduler with job queuing and automatic retries.
+
+Both interfaces can be used independently or together depending on your application's needs. The interfaces are installed separately to maintain modularity and minimize dependencies.
+
+| Name            | Install command                          |                                                                          |
+| --------------- | ---------------------------------------- | ------------------------------------------------------------------------ |
+| Redis           | `ajs module imports add redis`           | [Documentation](https://github.com/AntelopeJS/interface-redis)           |
+| Redis Scheduler | `ajs module imports add redis_scheduler` | [Documentation](https://github.com/AntelopeJS/interface-redis-scheduler) |
 
 ## Overview
 
