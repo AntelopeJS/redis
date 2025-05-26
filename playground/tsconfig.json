@@ -20,8 +20,8 @@
     "baseUrl": "src",
     "paths": {
       "@ajs.local/*": ["interfaces/*"],
-      "@ajs/redis/*": ["../../.antelope/output/redis/*"],
-      "@ajs/redis_scheduler/*": ["../../.antelope/output/redis_scheduler/*"],
+      "@ajs/redis/*": ["../../output/redis/*"],
+      "@ajs/redis_scheduler/*": ["../../output/redis_scheduler/*"],
       "@ajs/core/*": ["../../.antelope/interfaces.d/core/*"],
       "@ajs/*": ["../.antelope/interfaces.d/*"]
     }

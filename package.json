@@ -26,6 +26,7 @@
     "generate": "ajs module exports generate",
     "postinstall": "ajs module imports update",
     "build": "tsc",
+    "dev:prepare": "cd playground && ajs module imports update",
     "dev": "ajs project run -w -p playground",
     "format": "prettier --write .",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
