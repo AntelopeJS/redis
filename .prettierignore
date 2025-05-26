@@ -8,3 +8,4 @@ coverage
 *.log
 **/*.min.js
 pnpm-lock.yaml
+.github
