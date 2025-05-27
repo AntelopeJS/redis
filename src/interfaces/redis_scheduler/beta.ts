@@ -203,7 +203,7 @@ export async function updateTimer() {
       if (timer) {
         clearTimeout(timer);
       }
-      timer = setTimeout(() => void runTasks(), score - Date.now());
+      timer = setTimeout(() => void runTasks(), Math.min(score - Date.now(), 86400000));
     }
   }
 }
