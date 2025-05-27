@@ -1,8 +1,0 @@
-{
-    "config": {
-        "url": "redis://localhost:6379",
-        "socket": {
-            "reconnectStrategy": true
-        }
-    }
-} 
