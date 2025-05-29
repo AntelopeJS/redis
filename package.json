@@ -40,7 +40,10 @@
     "imports": [
       "core@beta"
     ],
-    "importsOptional": []
+    "importsOptional": [],
+    "defaultConfig": {
+      "url": "redis://localhost:6379"
+    }
   },
   "dependencies": {
     "redis": "^4.7.0"
