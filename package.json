@@ -1,6 +1,6 @@
 {
   "name": "@antelopejs/redis",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Redis module that implements the redis interface of antelopejs",
   "keywords": [
     "antelopejs",
