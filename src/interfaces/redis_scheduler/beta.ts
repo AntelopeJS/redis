@@ -74,6 +74,7 @@ let subscriber: RedisClientType;
  */
 export async function enableListener() {
   subscriber = (await GetClient()).duplicate();
+  await subscriber.connect();
 
   await subscriber.subscribe('SchedulerUtil', (message, channel) => {
     if (channel === 'SchedulerUtil') {
