@@ -365,6 +365,9 @@ $RECYCLE.BIN/
 # Antelope
 .antelope
 
+# AntelopeJS / build caches
+node-compile-cache
+
 # pnpm store
 .pnpm-store
 
