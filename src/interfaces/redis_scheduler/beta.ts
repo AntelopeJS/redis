@@ -239,7 +239,7 @@ export async function updateTimer() {
 export async function runTasks() {
   locked = true;
   const client = await GetClient();
-  const tasks = await client.zrange(RedisKey, Date.now(), 0, 'BYSCORE', 'REV');
+  const tasks = await client.zrangebyscore(RedisKey, 0, Date.now());
   if (tasks.length > 0) {
     await client.zrem(RedisKey, ...tasks);
     for (const task of tasks) {
