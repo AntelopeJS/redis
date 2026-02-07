@@ -12,8 +12,11 @@ export function construct(config: RedisConfig): void {
 
 export function destroy(): void {}
 
-export function start(): void {
+export async function start(): Promise<void> {
   const client = createRedisClient(redisConfig);
+  if (redisConfig.lazyConnect) {
+    await client.connect();
+  }
   internal.SetClient(client);
 }
 
