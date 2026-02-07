@@ -16,6 +16,7 @@ const MaxRetries = 3;
 const RetryDelayMs = 5000;
 const MaxTimerDelayMs = 86400000;
 const RetryPattern = /^(?:RETRY-(\d)+:)?([^:]*):(.*)$/;
+const RedisReadyStatus = 'ready';
 
 /** Map of registered task handlers by name */
 const handlers = new Map<string, HandlerType>();
@@ -84,6 +85,9 @@ const SubscriberMessageHandlers: Record<string, () => void> = {
  */
 export async function enableListener() {
   subscriber = (await GetClient()).duplicate();
+  if (subscriber.status !== RedisReadyStatus) {
+    await subscriber.connect();
+  }
   await subscriber.subscribe(SchedulerChannel);
   subscriber.on('message', (channel, message) => {
     if (channel !== SchedulerChannel) {
