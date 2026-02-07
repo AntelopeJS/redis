@@ -64,6 +64,10 @@ const SubscriberMessageHandlers: Record<string, () => void> = {
   [SchedulerUpdateMessage]: () => void updateTimer(),
 };
 
+function createTaskMember(handlerName: string, taskInfo: string): string {
+  return handlerName + ':' + taskInfo;
+}
+
 /**
  * Enables the task execution listener
  * This starts monitoring for scheduled tasks and executes them when due
@@ -156,7 +160,7 @@ export async function addTask(handlerName: string, dueTime: number, taskInfo: st
   }
 
   const client = await GetClient();
-  await client.zadd(RedisKey, dueTime, handlerName + ':' + taskInfo);
+  await client.zadd(RedisKey, dueTime, createTaskMember(handlerName, taskInfo));
   if (!locked) {
     void client.publish(SchedulerChannel, SchedulerUpdateMessage);
   }
@@ -191,7 +195,7 @@ export async function removeTask(handlerName: string, taskInfo: string) {
     throw new Error('Unknown SchedulerUtil handler: ' + handlerName);
   }
   const client = await GetClient();
-  await client.zrem(RedisKey, taskInfo);
+  await client.zrem(RedisKey, createTaskMember(handlerName, taskInfo));
 }
 
 /** Flag to prevent concurrent task execution */
