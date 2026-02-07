@@ -45,9 +45,7 @@ The Redis module can be configured with standard Redis client options:
 ```json
 {
   "url": "redis://localhost:6379",
-  "socket": {
-    "reconnectStrategy": true
-  }
+  "lazyConnect": true
 }
 ```
 
@@ -55,7 +53,7 @@ The Redis module can be configured with standard Redis client options:
 
 The module accepts the following configuration properties:
 
-- All standard Redis client options from the `redis` package
+- All standard Redis client options from the `ioredis` package
 - Supports all connection methods including URL string, socket options, etc.
 
 ## Integration with Other Modules

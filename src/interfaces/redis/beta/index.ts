@@ -1,11 +1,11 @@
-import { RedisClientType } from 'redis';
+import Redis from 'ioredis';
 
 /**
  * @internal
  */
 export namespace internal {
-  export let client: Promise<RedisClientType>;
-  export let SetClient: (client: RedisClientType) => void;
+  export let client: Promise<Redis>;
+  export let SetClient: (client: Redis) => void;
   export const UnsetClient = () => (client = new Promise((resolve) => (SetClient = resolve)));
   void UnsetClient();
 }
@@ -37,6 +37,6 @@ export namespace internal {
  * }
  * ```
  */
-export function GetClient(): Promise<RedisClientType> {
+export function GetClient(): Promise<Redis> {
   return internal.client;
 }

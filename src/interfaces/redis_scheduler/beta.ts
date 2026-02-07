@@ -1,6 +1,6 @@
 import { RegisteringProxy } from '@ajs/core/beta';
 import { GetClient } from '@ajs.local/redis/beta';
-import { RedisClientType } from 'redis';
+import Redis from 'ioredis';
 
 /**
  * Handler function type for processing scheduled tasks
@@ -10,6 +10,13 @@ type HandlerType = (taskInfo: string) => void | Promise<void>;
 
 /** Redis key used to store scheduled tasks in a sorted set */
 const RedisKey = 'SchedulerUtil.Tasks';
+const SchedulerChannel = 'SchedulerUtil';
+const SchedulerUpdateMessage = 'update';
+const MaxRetries = 3;
+const RetryDelayMs = 5000;
+const MaxTimerDelayMs = 86400000;
+const RetryPattern = /^(?:RETRY-(\d)+:)?([^:]*):(.*)$/;
+const RedisReadyStatus = 'ready';
 
 /** Map of registered task handlers by name */
 const handlers = new Map<string, HandlerType>();
@@ -51,7 +58,15 @@ export function setHandler(handlerName: string, handler: HandlerType) {
 }
 
 /** Redis subscriber client for receiving task updates */
-let subscriber: RedisClientType;
+let subscriber: Redis;
+
+const SubscriberMessageHandlers: Record<string, () => void> = {
+  [SchedulerUpdateMessage]: () => void updateTimer(),
+};
+
+function createTaskMember(handlerName: string, taskInfo: string): string {
+  return handlerName + ':' + taskInfo;
+}
 
 /**
  * Enables the task execution listener
@@ -74,16 +89,19 @@ let subscriber: RedisClientType;
  */
 export async function enableListener() {
   subscriber = (await GetClient()).duplicate();
-  await subscriber.connect();
-
-  await subscriber.subscribe('SchedulerUtil', (message, channel) => {
-    if (channel === 'SchedulerUtil') {
-      switch (message) {
-        case 'update':
-          void updateTimer();
-          break;
-      }
+  if (subscriber.status !== RedisReadyStatus) {
+    await subscriber.connect();
+  }
+  await subscriber.subscribe(SchedulerChannel);
+  subscriber.on('message', (channel, message) => {
+    if (channel !== SchedulerChannel) {
+      return;
     }
+    const handler = SubscriberMessageHandlers[message];
+    if (!handler) {
+      return;
+    }
+    handler();
   });
 
   void updateTimer();
@@ -105,7 +123,7 @@ export async function enableListener() {
  * ```
  */
 export async function disableListener() {
-  await subscriber.disconnect();
+  await subscriber.quit();
 }
 
 /**
@@ -142,9 +160,9 @@ export async function addTask(handlerName: string, dueTime: number, taskInfo: st
   }
 
   const client = await GetClient();
-  await client.zAdd(RedisKey, { score: dueTime, value: handlerName + ':' + taskInfo });
+  await client.zadd(RedisKey, dueTime, createTaskMember(handlerName, taskInfo));
   if (!locked) {
-    void client.publish('SchedulerUtil', 'update');
+    void client.publish(SchedulerChannel, SchedulerUpdateMessage);
   }
 }
 
@@ -177,7 +195,7 @@ export async function removeTask(handlerName: string, taskInfo: string) {
     throw new Error('Unknown SchedulerUtil handler: ' + handlerName);
   }
   const client = await GetClient();
-  await client.zRem(RedisKey, taskInfo);
+  await client.zrem(RedisKey, createTaskMember(handlerName, taskInfo));
 }
 
 /** Flag to prevent concurrent task execution */
@@ -195,16 +213,20 @@ export async function updateTimer() {
   }
 
   const client = await GetClient();
-  const taskInfo = (await client.zRange(RedisKey, 0, 0))[0];
+  const taskInfo = (await client.zrange(RedisKey, 0, 0))[0];
   if (taskInfo) {
-    const score = (await client.zScore(RedisKey, taskInfo))!;
+    const scoreValue = await client.zscore(RedisKey, taskInfo);
+    if (!scoreValue) {
+      return;
+    }
+    const score = Number(scoreValue);
     if (score < Date.now()) {
       await runTasks();
     } else {
       if (timer) {
         clearTimeout(timer);
       }
-      timer = setTimeout(() => void runTasks(), Math.min(score - Date.now(), 86400000));
+      timer = setTimeout(() => void runTasks(), Math.min(score - Date.now(), MaxTimerDelayMs));
     }
   }
 }
@@ -217,11 +239,11 @@ export async function updateTimer() {
 export async function runTasks() {
   locked = true;
   const client = await GetClient();
-  const tasks = await client.zRange(RedisKey, Date.now(), 0, { REV: true, BY: 'SCORE' });
+  const tasks = await client.zrangebyscore(RedisKey, 0, Date.now());
   if (tasks.length > 0) {
-    await client.zRem(RedisKey, tasks);
+    await client.zrem(RedisKey, ...tasks);
     for (const task of tasks) {
-      const m = task.match(/^(?:RETRY-(\d)+:)?([^:]*):(.*)$/);
+      const m = task.match(RetryPattern);
       try {
         if (m && handlers.has(m[2])) {
           await handlers.get(m[2])!(m[3]);
@@ -229,12 +251,9 @@ export async function runTasks() {
       } catch (err) {
         console.error(err);
         if (m) {
-          const retryCount = m[1] ? parseInt(m[1]) : 0;
-          if (retryCount < 3) {
-            await client.zAdd(RedisKey, {
-              score: Date.now() + 5000,
-              value: `RETRY-${retryCount + 1}:${m[2]}:${m[3]}`,
-            });
+          const retryCount = m[1] ? parseInt(m[1], 10) : 0;
+          if (retryCount < MaxRetries) {
+            await client.zadd(RedisKey, Date.now() + RetryDelayMs, `RETRY-${retryCount + 1}:${m[2]}:${m[3]}`);
           }
         }
       }

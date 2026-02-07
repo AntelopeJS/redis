@@ -1,4 +1,4 @@
-import { RedisClientType } from 'redis';
+import Redis from 'ioredis';
 /**
  * Retrieves the initialized Redis client instance.
  * This is the main entry point for accessing Redis functionality.
@@ -26,4 +26,4 @@ import { RedisClientType } from 'redis';
  * }
  * ```
  */
-export declare function GetClient(): Promise<RedisClientType>;
+export declare function GetClient(): Promise<Redis>;
