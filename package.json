@@ -33,7 +33,7 @@
     "prepack": "pnpm run build",
     "prepare": "ajs module imports install",
     "release": "pnpm run lint && pnpm run test && pnpm run prepack && release-it",
-    "test": "echo \"No test specified\""
+    "test": "ajs module test ."
   },
   "antelopeJs": {
     "exportsPath": "dist/interfaces",
@@ -43,6 +43,10 @@
     "importsOptional": [],
     "defaultConfig": {
       "url": "redis://localhost:6379"
+    },
+    "test": {
+      "project": "src/test/test-project-loader.js",
+      "folder": "dist/test"
     }
   },
   "dependencies": {
@@ -50,17 +54,22 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
-    "rimraf": "^6.0.1",
     "@eslint/js": "^9.25.0",
+    "chai": "^4.5.0",
+    "@types/chai": "^4.3.20",
+    "@types/ioredis-mock": "^8.2.6",
+    "@types/mocha": "^10.0.10",
     "@types/node": "^22.14.1",
     "eslint": "^9.25.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.6",
     "globals": "^16.0.0",
+    "ioredis-mock": "^8.13.1",
     "prettier": "^3.5.3",
     "release-it": "^19.0.2",
     "release-it-changelogen": "^0.1.0",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.30.1"
   }
