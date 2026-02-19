@@ -33,6 +33,7 @@ describe('Redis Scheduler - removeTask', () => {
 
 describe('Redis Scheduler - enableListener / disableListener', () => {
   it('should enable and disable the listener', async () => EnableDisableListenerTest());
+  it('should use lazyConnect when duplicating client', async () => EnableListenerUsesLazyConnectTest());
 });
 
 describe('Redis Scheduler - runTasks', () => {
@@ -111,6 +112,24 @@ async function RemoveTaskUnknownHandlerTest() {
 async function EnableDisableListenerTest() {
   await enableListener();
   await disableListener();
+}
+
+async function EnableListenerUsesLazyConnectTest() {
+  const client = await GetClient();
+  const originalDuplicate = client.duplicate.bind(client);
+  let duplicateOptions: Record<string, unknown> | undefined;
+
+  client.duplicate = ((override?: Record<string, unknown>) => {
+    duplicateOptions = override;
+    return originalDuplicate(override);
+  }) as typeof client.duplicate;
+
+  await enableListener();
+
+  expect(duplicateOptions).to.deep.include({ lazyConnect: true });
+
+  await disableListener();
+  client.duplicate = originalDuplicate;
 }
 
 async function RunDueTasksTest() {
