@@ -1,10 +1,10 @@
 module.exports.setup = async () => ({
-  cacheFolder: '.antelope/cache',
+  cacheFolder: ".antelope/cache",
   modules: {
     local: {
       source: {
-        type: 'local',
-        path: '.',
+        type: "local",
+        path: ".",
       },
       config: {
         useMock: true,

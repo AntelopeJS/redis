@@ -1,4 +1,4 @@
-import Redis from 'ioredis';
+import type Redis from "ioredis";
 /**
  * Retrieves the initialized Redis client instance.
  * This is the main entry point for accessing Redis functionality.

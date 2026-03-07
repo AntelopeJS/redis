@@ -1,6 +1,6 @@
-import { RegisteringProxy } from '@ajs/core/beta';
-import { GetClient } from '@ajs.local/redis/beta';
-import Redis from 'ioredis';
+import { RegisteringProxy } from "@ajs/core/beta";
+import { GetClient } from "@ajs.local/redis/beta";
+import type Redis from "ioredis";
 
 /**
  * Handler function type for processing scheduled tasks
@@ -9,9 +9,9 @@ import Redis from 'ioredis';
 type HandlerType = (taskInfo: string) => void | Promise<void>;
 
 /** Redis key used to store scheduled tasks in a sorted set */
-const RedisKey = 'SchedulerUtil.Tasks';
-const SchedulerChannel = 'SchedulerUtil';
-const SchedulerUpdateMessage = 'update';
+const RedisKey = "SchedulerUtil.Tasks";
+const SchedulerChannel = "SchedulerUtil";
+const SchedulerUpdateMessage = "update";
 const MaxRetries = 3;
 const RetryDelayMs = 5000;
 const MaxTimerDelayMs = 86400000;
@@ -20,10 +20,12 @@ const RetryPattern = /^(?:RETRY-(\d)+:)?([^:]*):(.*)$/;
 /** Map of registered task handlers by name */
 const handlers = new Map<string, HandlerType>();
 /** Proxy for registering/unregistering task handlers */
-const proxy = new RegisteringProxy<(handlerName: string, handler: HandlerType) => void>();
+const proxy = new RegisteringProxy<
+  (handlerName: string, handler: HandlerType) => void
+>();
 proxy.onRegister((handlerName: string, handler: HandlerType) => {
-  if (handlerName.indexOf(':') !== -1) {
-    throw new Error('SchedulerUtil handler name may not contain `:`');
+  if (handlerName.indexOf(":") !== -1) {
+    throw new Error("SchedulerUtil handler name may not contain `:`");
   }
   handlers.set(handlerName, handler);
 }, true);
@@ -64,7 +66,7 @@ const SubscriberMessageHandlers: Record<string, () => void> = {
 };
 
 function createTaskMember(handlerName: string, taskInfo: string): string {
-  return handlerName + ':' + taskInfo;
+  return `${handlerName}:${taskInfo}`;
 }
 
 /**
@@ -90,7 +92,7 @@ export async function enableListener() {
   subscriber = (await GetClient()).duplicate({ lazyConnect: true });
   await subscriber.connect();
   await subscriber.subscribe(SchedulerChannel);
-  subscriber.on('message', (channel, message) => {
+  subscriber.on("message", (channel, message) => {
     if (channel !== SchedulerChannel) {
       return;
     }
@@ -151,9 +153,13 @@ export async function disableListener() {
  * }
  * ```
  */
-export async function addTask(handlerName: string, dueTime: number, taskInfo: string) {
+export async function addTask(
+  handlerName: string,
+  dueTime: number,
+  taskInfo: string,
+) {
   if (!handlers.has(handlerName)) {
-    throw new Error('Unknown SchedulerUtil handler: ' + handlerName);
+    throw new Error(`Unknown SchedulerUtil handler: ${handlerName}`);
   }
 
   const client = await GetClient();
@@ -189,7 +195,7 @@ export async function addTask(handlerName: string, dueTime: number, taskInfo: st
  */
 export async function removeTask(handlerName: string, taskInfo: string) {
   if (!handlers.has(handlerName)) {
-    throw new Error('Unknown SchedulerUtil handler: ' + handlerName);
+    throw new Error(`Unknown SchedulerUtil handler: ${handlerName}`);
   }
   const client = await GetClient();
   await client.zrem(RedisKey, createTaskMember(handlerName, taskInfo));
@@ -223,7 +229,10 @@ export async function updateTimer() {
       if (timer) {
         clearTimeout(timer);
       }
-      timer = setTimeout(() => void runTasks(), Math.min(score - Date.now(), MaxTimerDelayMs));
+      timer = setTimeout(
+        () => void runTasks(),
+        Math.min(score - Date.now(), MaxTimerDelayMs),
+      );
     }
   }
 }
@@ -243,14 +252,18 @@ export async function runTasks() {
       const m = task.match(RetryPattern);
       try {
         if (m && handlers.has(m[2])) {
-          await handlers.get(m[2])!(m[3]);
+          await handlers.get(m[2])?.(m[3]);
         }
       } catch (err) {
         console.error(err);
         if (m) {
           const retryCount = m[1] ? parseInt(m[1], 10) : 0;
           if (retryCount < MaxRetries) {
-            await client.zadd(RedisKey, Date.now() + RetryDelayMs, `RETRY-${retryCount + 1}:${m[2]}:${m[3]}`);
+            await client.zadd(
+              RedisKey,
+              Date.now() + RetryDelayMs,
+              `RETRY-${retryCount + 1}:${m[2]}:${m[3]}`,
+            );
           }
         }
       }
