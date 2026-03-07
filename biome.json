@@ -13,10 +13,7 @@
       "!**/dist",
       "!node_modules",
       "!**/node_modules",
-      "!r2-worker",
       "!.antelope",
-      "!nuxt-layer",
-      "!src/pdf",
       "!output"
     ]
   },
