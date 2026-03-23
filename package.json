@@ -24,32 +24,28 @@
   "packageManager": "pnpm@10.6.5",
   "scripts": {
     "build": "rimraf dist && tsc",
-    "dev:prepare": "cd playground && ajs module imports install",
     "dev": "ajs project run -w -p playground --inspect",
     "format": "biome format --write .",
-    "generate": "ajs module exports generate",
     "lint:fix": "biome check --write .",
     "lint": "biome check .",
     "prepack": "pnpm run build",
-    "prepare": "ajs module imports install",
     "release": "pnpm run lint && pnpm run test && pnpm run prepack && release-it",
     "test": "ajs module test ."
   },
   "antelopeJs": {
-    "exportsPath": "dist/interfaces",
-    "imports": [
-      "core@beta"
+    "implements": [
+      "@antelopejs/interface-redis",
+      "@antelopejs/interface-redis-scheduler"
     ],
-    "importsOptional": [],
     "defaultConfig": {
       "url": "redis://localhost:6379"
     },
-    "test": {
-      "project": "src/test/test-project-loader.js",
-      "folder": "dist/test"
-    }
+    "test": "src/test/antelope.test.ts"
   },
   "dependencies": {
+    "@antelopejs/interface-core": "^0.0.2",
+    "@antelopejs/interface-redis": "^0.0.2",
+    "@antelopejs/interface-redis-scheduler": "^0.0.2",
     "ioredis": "^5.4.2"
   },
   "devDependencies": {
@@ -60,7 +56,7 @@
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.14.1",
     "ioredis-mock": "^8.13.1",
-    "release-it": "^19.0.2",
+    "release-it": "^19.2.4",
     "release-it-changelogen": "^0.1.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3"

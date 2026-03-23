@@ -1,4 +1,4 @@
-import { internal } from "@ajs.local/redis/beta";
+import { internal } from "@antelopejs/interface-redis";
 import Redis, { type RedisOptions } from "ioredis";
 
 export interface RedisConfig extends RedisOptions {
