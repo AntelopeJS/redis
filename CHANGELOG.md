@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.0.1
+
+[compare changes](https://github.com/AntelopeJS/redis/compare/v1.0.0...v1.0.1)
+
+### 🩹 Fixes
+
+- Move ioredis-mock to dependencies for useMock support ([f6aa53d](https://github.com/AntelopeJS/redis/commit/f6aa53d))
+
+### 🏡 Chore
+
+- Update package.json ([887876b](https://github.com/AntelopeJS/redis/commit/887876b))
+
+### ❤️ Contributors
+
+- Antony Rizzitelli <upd4ting@gmail.com>
+
 ## v1.0.0
 
 [compare changes](https://github.com/AntelopeJS/redis/compare/v0.1.1...v1.0.0)
