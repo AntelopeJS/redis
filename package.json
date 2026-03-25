@@ -46,7 +46,8 @@
     "@antelopejs/interface-core": "^0.0.2",
     "@antelopejs/interface-redis": "^0.0.2",
     "@antelopejs/interface-redis-scheduler": "^0.0.2",
-    "ioredis": "^5.4.2"
+    "ioredis": "^5.4.2",
+    "ioredis-mock": "^8.13.1"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.2",
@@ -55,7 +56,6 @@
     "@types/ioredis-mock": "^8.2.6",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.14.1",
-    "ioredis-mock": "^8.13.1",
     "release-it": "^19.2.4",
     "release-it-changelogen": "^0.1.0",
     "rimraf": "^6.0.1",
