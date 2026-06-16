@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@antelopejs/interface-core':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.5
+        version: 0.0.5
       '@antelopejs/interface-redis':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.6
+        version: 0.0.6(@antelopejs/interface-core@0.0.5)
       '@antelopejs/interface-redis-scheduler':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.6
+        version: 0.0.6(@antelopejs/interface-core@0.0.5)(@antelopejs/interface-redis@0.0.6(@antelopejs/interface-core@0.0.5))
       ioredis:
         specifier: ^5.10.1
         version: 5.10.1
@@ -58,8 +58,8 @@ importers:
   playground:
     dependencies:
       '@antelopejs/interface-core':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.5
+        version: 0.0.5
     devDependencies:
       '@types/node':
         specifier: ^20.5.7
@@ -73,14 +73,19 @@ importers:
 
 packages:
 
-  '@antelopejs/interface-core@0.0.2':
-    resolution: {integrity: sha512-CmtOJvSCRj20GOQhrE0PpHybGaW1G1lrepiKHVJa/bclhrvFYgHV0MH84TMpMOHESQT/+wuup007tfXAwaI+Eg==}
+  '@antelopejs/interface-core@0.0.5':
+    resolution: {integrity: sha512-4H6hpFfiK2+DE8vL2mEtPbq1WNch9lt40QNr9KjBrOAtnuq/zMfIlzhbEsda39m+FVkMWXfUYoVolRogVKCLIQ==}
 
-  '@antelopejs/interface-redis-scheduler@0.0.2':
-    resolution: {integrity: sha512-5Hdw3eCKNiwIoJD6iDe0SqwliuLsrApx1j/C3cn2JRP0giYoaT9ucfgqHv1OwkQ+mXiwvJfY4B3iEWKakzUj3Q==}
+  '@antelopejs/interface-redis-scheduler@0.0.6':
+    resolution: {integrity: sha512-d1bquTUgmtIJJP02OxSDhFVpudo9tSk2GJ0sQ0A/nXxOSAJlECmo0VYB+d+x2OCgjBCud2ksRVGEhZw7jujCJQ==}
+    peerDependencies:
+      '@antelopejs/interface-core': '>=0.0.3 <1.0.0'
+      '@antelopejs/interface-redis': '>=0.0.5 <1.0.0'
 
-  '@antelopejs/interface-redis@0.0.2':
-    resolution: {integrity: sha512-BT4wtDG/xVqCrExcJUnMjBJRJdF2+t4GqkYB8r6vxU49hlZYW3cg8JBt7WL2n04ggBFi6znQg/B2YlVcZR+yuA==}
+  '@antelopejs/interface-redis@0.0.6':
+    resolution: {integrity: sha512-c9at7pIFO2UbFlL4EFJht8Wt8uir33oj1Ja1rxMgPLPO8x8bOk4s9//Bqaigrjc0ELj/5zZQkqx3fHdmNru5QQ==}
+    peerDependencies:
+      '@antelopejs/interface-core': '>=0.0.3 <1.0.0'
 
   '@biomejs/biome@2.3.2':
     resolution: {integrity: sha512-8e9tzamuDycx7fdrcJ/F/GDZ8SYukc5ud6tDicjjFqURKYFSWMl0H0iXNXZEGmcmNUmABgGuHThPykcM41INgg==}
@@ -1262,21 +1267,21 @@ packages:
 
 snapshots:
 
-  '@antelopejs/interface-core@0.0.2':
+  '@antelopejs/interface-core@0.0.5':
     dependencies:
       reflect-metadata: 0.2.2
 
-  '@antelopejs/interface-redis-scheduler@0.0.2':
+  '@antelopejs/interface-redis-scheduler@0.0.6(@antelopejs/interface-core@0.0.5)(@antelopejs/interface-redis@0.0.6(@antelopejs/interface-core@0.0.5))':
     dependencies:
-      '@antelopejs/interface-core': 0.0.2
-      '@antelopejs/interface-redis': 0.0.2
+      '@antelopejs/interface-core': 0.0.5
+      '@antelopejs/interface-redis': 0.0.6(@antelopejs/interface-core@0.0.5)
       ioredis: 5.10.1
     transitivePeerDependencies:
       - supports-color
 
-  '@antelopejs/interface-redis@0.0.2':
+  '@antelopejs/interface-redis@0.0.6(@antelopejs/interface-core@0.0.5)':
     dependencies:
-      '@antelopejs/interface-core': 0.0.2
+      '@antelopejs/interface-core': 0.0.5
       ioredis: 5.10.1
     transitivePeerDependencies:
       - supports-color
