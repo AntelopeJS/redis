@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.0.2
+
+[compare changes](https://github.com/AntelopeJS/redis/compare/v1.0.1...v1.0.2)
+
+### 🏡 Chore
+
+- Update dependencies ([57b2a27](https://github.com/AntelopeJS/redis/commit/57b2a27))
+
+### ❤️ Contributors
+
+- Antony Rizzitelli <upd4ting@gmail.com>
+
 ## v1.0.1
 
 [compare changes](https://github.com/AntelopeJS/redis/compare/v1.0.0...v1.0.1)
