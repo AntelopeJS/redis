@@ -43,7 +43,7 @@
     "test": "src/test/antelope.test.ts"
   },
   "dependencies": {
-    "@antelopejs/interface-core": "^0.0.5",
+    "@antelopejs/interface-core": "^0.0.6",
     "@antelopejs/interface-redis": "^0.0.6",
     "@antelopejs/interface-redis-scheduler": "^0.0.6",
     "ioredis": "^5.10.1",
