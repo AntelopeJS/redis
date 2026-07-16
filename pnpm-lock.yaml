@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@antelopejs/interface-core':
-        specifier: ^0.0.5
-        version: 0.0.5
+        specifier: ^0.0.6
+        version: 0.0.6
       '@antelopejs/interface-redis':
         specifier: ^0.0.6
-        version: 0.0.6(@antelopejs/interface-core@0.0.5)
+        version: 0.0.6(@antelopejs/interface-core@0.0.6)
       '@antelopejs/interface-redis-scheduler':
         specifier: ^0.0.6
-        version: 0.0.6(@antelopejs/interface-core@0.0.5)(@antelopejs/interface-redis@0.0.6(@antelopejs/interface-core@0.0.5))
+        version: 0.0.6(@antelopejs/interface-core@0.0.6)(@antelopejs/interface-redis@0.0.6(@antelopejs/interface-core@0.0.6))
       ioredis:
         specifier: ^5.10.1
         version: 5.10.1
@@ -58,8 +58,8 @@ importers:
   playground:
     dependencies:
       '@antelopejs/interface-core':
-        specifier: ^0.0.5
-        version: 0.0.5
+        specifier: ^0.0.6
+        version: 0.0.6
     devDependencies:
       '@types/node':
         specifier: ^20.5.7
@@ -73,8 +73,8 @@ importers:
 
 packages:
 
-  '@antelopejs/interface-core@0.0.5':
-    resolution: {integrity: sha512-4H6hpFfiK2+DE8vL2mEtPbq1WNch9lt40QNr9KjBrOAtnuq/zMfIlzhbEsda39m+FVkMWXfUYoVolRogVKCLIQ==}
+  '@antelopejs/interface-core@0.0.6':
+    resolution: {integrity: sha512-OMna86iT/ylL6wJl6FCPw9ieddULXGs4jTmeiDBNEXYQ9acnVXjS/+SaN0UR0h7oY7WTD9VwKXVwG95qjNIA1w==}
 
   '@antelopejs/interface-redis-scheduler@0.0.6':
     resolution: {integrity: sha512-d1bquTUgmtIJJP02OxSDhFVpudo9tSk2GJ0sQ0A/nXxOSAJlECmo0VYB+d+x2OCgjBCud2ksRVGEhZw7jujCJQ==}
@@ -1267,21 +1267,21 @@ packages:
 
 snapshots:
 
-  '@antelopejs/interface-core@0.0.5':
+  '@antelopejs/interface-core@0.0.6':
     dependencies:
       reflect-metadata: 0.2.2
 
-  '@antelopejs/interface-redis-scheduler@0.0.6(@antelopejs/interface-core@0.0.5)(@antelopejs/interface-redis@0.0.6(@antelopejs/interface-core@0.0.5))':
+  '@antelopejs/interface-redis-scheduler@0.0.6(@antelopejs/interface-core@0.0.6)(@antelopejs/interface-redis@0.0.6(@antelopejs/interface-core@0.0.6))':
     dependencies:
-      '@antelopejs/interface-core': 0.0.5
-      '@antelopejs/interface-redis': 0.0.6(@antelopejs/interface-core@0.0.5)
+      '@antelopejs/interface-core': 0.0.6
+      '@antelopejs/interface-redis': 0.0.6(@antelopejs/interface-core@0.0.6)
       ioredis: 5.10.1
     transitivePeerDependencies:
       - supports-color
 
-  '@antelopejs/interface-redis@0.0.6(@antelopejs/interface-core@0.0.5)':
+  '@antelopejs/interface-redis@0.0.6(@antelopejs/interface-core@0.0.6)':
     dependencies:
-      '@antelopejs/interface-core': 0.0.5
+      '@antelopejs/interface-core': 0.0.6
       ioredis: 5.10.1
     transitivePeerDependencies:
       - supports-color
