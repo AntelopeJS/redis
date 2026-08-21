@@ -43,9 +43,9 @@
     "test": "src/test/antelope.test.ts"
   },
   "dependencies": {
-    "@antelopejs/interface-core": "^0.0.6",
-    "@antelopejs/interface-redis": "^0.0.6",
-    "@antelopejs/interface-redis-scheduler": "^0.0.6",
+    "@antelopejs/interface-core": ">=0.0.6 <1.0.0",
+    "@antelopejs/interface-redis": ">=0.0.6 <1.0.0",
+    "@antelopejs/interface-redis-scheduler": ">=0.0.6 <1.0.0",
     "ioredis": "^5.10.1",
     "ioredis-mock": "^8.13.1"
   },

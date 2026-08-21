@@ -9,13 +9,13 @@ importers:
   .:
     dependencies:
       '@antelopejs/interface-core':
-        specifier: ^0.0.6
+        specifier: '>=0.0.6 <1.0.0'
         version: 0.0.6
       '@antelopejs/interface-redis':
-        specifier: ^0.0.6
+        specifier: '>=0.0.6 <1.0.0'
         version: 0.0.6(@antelopejs/interface-core@0.0.6)
       '@antelopejs/interface-redis-scheduler':
-        specifier: ^0.0.6
+        specifier: '>=0.0.6 <1.0.0'
         version: 0.0.6(@antelopejs/interface-core@0.0.6)(@antelopejs/interface-redis@0.0.6(@antelopejs/interface-core@0.0.6))
       ioredis:
         specifier: ^5.10.1
@@ -58,7 +58,7 @@ importers:
   playground:
     dependencies:
       '@antelopejs/interface-core':
-        specifier: ^0.0.6
+        specifier: '>=0.0.6 <1.0.0'
         version: 0.0.6
     devDependencies:
       '@types/node':
