@@ -62,7 +62,7 @@ The Redis module is designed to be used as a dependency for other AntelopeJS mod
 
 ```typescript
 // Example of another module depending on Redis
-import { GetClient } from '@ajs/redis/beta';
+import { GetClient } from "@ajs/redis/beta";
 
 async function storeValueInRedis(key: string, value: string) {
   const client = await GetClient();
