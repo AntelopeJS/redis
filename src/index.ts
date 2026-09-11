@@ -1,5 +1,5 @@
-import { internal } from "@antelopejs/interface-redis";
 import Redis, { type RedisOptions } from "ioredis";
+import { internal } from "@antelopejs/interface-redis";
 
 export interface RedisConfig extends RedisOptions {
   url?: string;
