@@ -1,5 +1,3 @@
-![Redis](.github/social-card.png)
-
 # @antelopejs/redis
 
 <div align="center">
