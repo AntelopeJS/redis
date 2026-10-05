@@ -24,8 +24,8 @@ This module implements two key interfaces:
 
 Both interfaces can be used independently or together depending on your application's needs. The interfaces are published as separate packages to maintain modularity and minimize dependencies: a module that uses an interface adds its package as a dependency and imports from it.
 
-| Name            | Install command                                     |                                                                          |
-| --------------- | --------------------------------------------------- | ------------------------------------------------------------------------ |
+| Name            | Install command                                  |                                                                          |
+| --------------- | ------------------------------------------------ | ------------------------------------------------------------------------ |
 | Redis           | `pnpm add @antelopejs/interface-redis`           | [Documentation](https://github.com/AntelopeJS/interface-redis)           |
 | Redis Scheduler | `pnpm add @antelopejs/interface-redis-scheduler` | [Documentation](https://github.com/AntelopeJS/interface-redis-scheduler) |
 
