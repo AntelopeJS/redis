@@ -26,8 +26,8 @@ Both interfaces can be used independently or together depending on your applicat
 
 | Name            | Install command                                     |                                                                          |
 | --------------- | --------------------------------------------------- | ------------------------------------------------------------------------ |
-| Redis           | `npm install @antelopejs/interface-redis`           | [Documentation](https://github.com/AntelopeJS/interface-redis)           |
-| Redis Scheduler | `npm install @antelopejs/interface-redis-scheduler` | [Documentation](https://github.com/AntelopeJS/interface-redis-scheduler) |
+| Redis           | `pnpm add @antelopejs/interface-redis`           | [Documentation](https://github.com/AntelopeJS/interface-redis)           |
+| Redis Scheduler | `pnpm add @antelopejs/interface-redis-scheduler` | [Documentation](https://github.com/AntelopeJS/interface-redis-scheduler) |
 
 ## Overview
 
