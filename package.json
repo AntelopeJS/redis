@@ -42,7 +42,7 @@
     "ioredis-mock": "^8.13.1"
   },
   "devDependencies": {
-    "@antelopejs/core": "^1.9.1",
+    "@antelopejs/core": "^1.13.3",
     "@antelopejs/tooling-configs": "^0.0.6",
     "@types/chai": "^4.3.20",
     "@types/ioredis-mock": "^8.2.7",
