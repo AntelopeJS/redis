@@ -22,12 +22,12 @@ This module implements two key interfaces:
 - **Redis Interface**: Promise-based Redis client with key-value operations and pub/sub messaging.
 - **Redis Scheduler Interface**: Redis-based distributed task scheduler with job queuing and automatic retries.
 
-Both interfaces can be used independently or together depending on your application's needs. The interfaces are installed separately to maintain modularity and minimize dependencies.
+Both interfaces can be used independently or together depending on your application's needs. The interfaces are published as separate packages to maintain modularity and minimize dependencies: a module that uses an interface adds its package as a dependency and imports from it.
 
-| Name            | Install command                          |                                                                          |
-| --------------- | ---------------------------------------- | ------------------------------------------------------------------------ |
-| Redis           | `ajs module imports add redis`           | [Documentation](https://github.com/AntelopeJS/interface-redis)           |
-| Redis Scheduler | `ajs module imports add redis_scheduler` | [Documentation](https://github.com/AntelopeJS/interface-redis-scheduler) |
+| Name            | Install command                                  |                                                                          |
+| --------------- | ------------------------------------------------ | ------------------------------------------------------------------------ |
+| Redis           | `pnpm add @antelopejs/interface-redis`           | [Documentation](https://github.com/AntelopeJS/interface-redis)           |
+| Redis Scheduler | `pnpm add @antelopejs/interface-redis-scheduler` | [Documentation](https://github.com/AntelopeJS/interface-redis-scheduler) |
 
 ## Overview
 
@@ -60,7 +60,7 @@ The Redis module is designed to be used as a dependency for other AntelopeJS mod
 
 ```typescript
 // Example of another module depending on Redis
-import { GetClient } from "@ajs/redis/beta";
+import { GetClient } from "@antelopejs/interface-redis";
 
 async function storeValueInRedis(key: string, value: string) {
   const client = await GetClient();
