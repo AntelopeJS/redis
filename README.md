@@ -79,6 +79,12 @@ const greeting = await client.get("greeting");
 
 `GetClient()` waits until the module has connected. For distributed jobs, add `@antelopejs/interface-redis-scheduler` and read its [documentation](https://interfaces.antelopejs.com/docs/redis-scheduler/introduction).
 
+## Documentation
+
+- [Redis](https://interfaces.antelopejs.com/docs/redis/introduction): the `@antelopejs/interface-redis` contract this module implements
+- [Redis Scheduler](https://interfaces.antelopejs.com/docs/redis-scheduler/introduction): the `@antelopejs/interface-redis-scheduler` contract this module implements
+- [Configuration](https://framework.antelopejs.com/docs/concepts/configuration): module sources, `config` blocks and config variables in `antelope.config.ts`
+
 ## Compatibility
 
 | Package                                 | Supported range  |
