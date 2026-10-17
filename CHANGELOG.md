@@ -1,5 +1,35 @@
 # Changelog
 
+## v1.0.4
+
+[compare changes](https://github.com/AntelopeJS/redis/compare/v1.0.3...v1.0.4)
+
+### 📖 Documentation
+
+- **readme:** Remove social card image ([#21](https://github.com/AntelopeJS/redis/pull/21))
+- **readme:** Fix the outdated CLI commands in the README ([#27](https://github.com/AntelopeJS/redis/pull/27))
+- Rewrite the README ([#30](https://github.com/AntelopeJS/redis/pull/30))
+- **agents:** Simplify repository guidance ([#31](https://github.com/AntelopeJS/redis/pull/31))
+
+### 🏡 Chore
+
+- Replace Biome with oxlint, oxfmt and Knip ([#18](https://github.com/AntelopeJS/redis/pull/18))
+- Align community files with the organization defaults ([#20](https://github.com/AntelopeJS/redis/pull/20))
+- Remove .git-blame-ignore-revs ([#22](https://github.com/AntelopeJS/redis/pull/22))
+- **playground:** Update antelope dependencies to latest ([#25](https://github.com/AntelopeJS/redis/pull/25))
+
+### 🤖 CI
+
+- Standardize npm releases ([#17](https://github.com/AntelopeJS/redis/pull/17))
+- Use shared npm release workflow ([#19](https://github.com/AntelopeJS/redis/pull/19))
+- **release:** Release next from a dedicated branch and restore requireCommits ([#23](https://github.com/AntelopeJS/redis/pull/23))
+- **release:** Reference the shared release workflows through v1 ([#24](https://github.com/AntelopeJS/redis/pull/24))
+
+### ❤️ Contributors
+
+- Antony Rizzitelli <rizzitelli.antony@pm.me>
+- Thomas
+
 ## v1.0.3
 
 [compare changes](https://github.com/AntelopeJS/redis/compare/v1.0.2...v1.0.3)

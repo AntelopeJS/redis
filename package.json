@@ -1,6 +1,6 @@
 {
   "name": "@antelopejs/redis",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Redis module for AntelopeJS, implementing the Redis and Redis Scheduler interfaces with ioredis",
   "keywords": [
     "antelopejs",
