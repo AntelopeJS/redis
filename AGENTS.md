@@ -5,14 +5,14 @@ The ioredis implementation of `@antelopejs/interface-redis` and `@antelopejs/int
 ## Layout
 
 - `src/index.ts` holds the whole module: the `RedisConfig` type and the lifecycle (`construct`, `start`, `stop`, `destroy`). `useMock: true` serves an in-memory `ioredis-mock` client instead of connecting.
-- `src/test/antelope.test.ts` is the `ajs module test` project (`antelopeJs.test` in `package.json`). It loads this module with `useMock: true` and runs the compiled suites in `dist/test`.
+- `src/test/antelope.test.ts` is the `ajs module test` project (`antelopeJs.test` in `package.json`). It loads this module with `useMock: true` and runs the conformance suites shipped in `dist/tests` of each package listed in `antelopeJs.implements`; this repository has no suites of its own.
 - `playground/` is a pnpm workspace package that `pnpm dev` runs against `redis://127.0.0.1:6379`.
 
 ## Versioning
 
 - The interface packages stay ranges below `1.0.0` (`>=x <1.0.0`). When a dependency range changes, update the compatibility table in `README.md` too.
 - `ioredis-mock` is a runtime dependency, not a devDependency, because `useMock` loads it from the published module.
-- `chai`, `@types/chai` and `@types/mocha` stay in devDependencies although no source imports them: the conformance suites shipped compiled inside the interface packages `require("chai")` from this module's `node_modules`.
+- `chai` stays in devDependencies although no source imports it: the compiled conformance suites inside the interface packages `require("chai")` from this module's `node_modules`. knip also ignores `@types/chai` and `@types/mocha`, which no source uses either.
 
 ## Tests
 
