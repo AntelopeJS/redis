@@ -29,9 +29,8 @@ export async function stop(): Promise<void> {
 
 async function createRedisClient(config: RedisConfig): Promise<Redis> {
   if (config.useMock) {
-    // eslint-disable-next-line import/no-extraneous-dependencies
     const { default: RedisMock } = await import("ioredis-mock");
-    return new RedisMock({ lazyConnect: true }) as unknown as Redis;
+    return new RedisMock({ lazyConnect: true });
   }
   const { url, useMock: _, ...options } = config;
   if (!url) {

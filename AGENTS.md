@@ -24,7 +24,7 @@ The ioredis implementation of `@antelopejs/interface-redis` and `@antelopejs/int
 
 ## Guardrails
 
-Finish every change with `pnpm run checks`. It runs typecheck, lint, format, knip, tests, size, ratchet, suppressions, and sync, and prints only what failed. The change is done when it prints no failure.
+Finish every change with `pnpm run checks`. It runs typecheck, lint, format, knip, tests, size, suppressions, and sync, and prints only what failed. The change is done when it prints no failure.
 
 The tools enforce most rules, listed in the table at the end. The sections below hold the rules no tool checks.
 
@@ -62,10 +62,6 @@ Verify a boundary against the imports a developer or agent would plausibly write
 
 `guardrails.suppressions.json` caps the suppressions in authored code: lint directives per rule they name (`*` for none), `@ts-expect-error`, `@ts-ignore` and `SAFETY:` comments. A suppression over its ceiling fails: fix the code, or remove another suppression of the same kind. A rule that keeps needing suppressions should be changed in the preset. Never raise or remove a number in that file: the check fails a ceiling higher than on the pull request base, and only the operator approves a raise. A directive disabling `anti-slop/require-safety-comment-for-type-assertion` is burn-down debt: remove the assertion, or, where it holds, replace the directive with `SAFETY: <why it holds>`, which takes over its room without a raise. After you remove suppressions, run `pnpm run suppressions:update` and commit the lowered file.
 
-### Debt
-
-`guardrails.ratchet.json` records the lint findings and oversize files this repository already had. Its numbers only go down. After you remove debt, run `pnpm run ratchet:update` and commit the lowered file. A rule listed there is off for `oxlint`. The ratchet counts it instead, and the pre-commit hook rejects it on every line you add.
-
 ### What enforces what
 
 | Rule                                                                           | Enforced by                                         |
@@ -97,6 +93,5 @@ Verify a boundary against the imports a developer or agent would plausibly write
 | Managed files match the pack                                                   | `antelopejs-sync --check`                           |
 | Entry-only rules exempt no tracked outsider                                    | `antelopejs-sync --check`                           |
 | A test names the wrong implementation it catches                               | review; no tool                                     |
-| Existing debt only shrinks                                                     | `antelopejs-ratchet`                                |
 
 <!-- antelopejs-guardrails:end -->
