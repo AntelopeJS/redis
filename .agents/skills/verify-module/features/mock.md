@@ -14,7 +14,7 @@ journeys:
 
 ## Sub-features
 
-- `no-real-writes`: with `useMock` and a real `url`, a key set through `GetClient()` is read back from the mock while `DBSIZE` of the real server stays `0` and no client of the module is connected. This is the containment journey of the Data door.
+- `no-real-writes`: with `useMock` and a real `url`, a key set through `GetClient()` is read back from the mock while `DBSIZE` of the real server stays `0` and no client of the module is connected.
 - `mock-forgets-on-restart`: after Ctrl+C and a second `ajs project dev`, the key written to the mock reads `null`.
 
 ## How to get to it (user POV)

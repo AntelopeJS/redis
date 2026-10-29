@@ -46,8 +46,8 @@ const config: VerifyConfig = {
     data: {
       globs: ["src/index.ts"],
       funnels: ["src/index.ts"],
-      containments: ["options/db-isolation", "mock/no-real-writes"],
-      why: "the module builds the one client every consumer writes and deletes keys through: its url, db and mock switch decide which Redis and which database the keys land in",
+      containments: ["options/default-db"],
+      why: "the module builds the one client every consumer writes and deletes keys through: its url and db options decide which Redis database the keys land in, and the default must stay db 0 so an upgrade keeps reading the keys the last release wrote",
     },
     format: null,
     contract: {
@@ -217,6 +217,46 @@ const config: VerifyConfig = {
         context.expect(stored.folder, [equal("db 4 holds the prefixed key", stored.stdout.trim(), "prefixed")]);
         const inZero = await cli(context, "redis-cli DBSIZE in db 0", ["-n", "0", "DBSIZE"]);
         context.expect(inZero.folder, [equal("db 0 holds nothing", inZero.stdout.trim(), "0")]);
+        await context.stop("SIGINT", app);
+      },
+    },
+    "default-db": {
+      title: "without a db option the module uses db 0: keys land there, and the keys another application keeps in db 1 stay untouched",
+      entryPoint: "`GetClient()` on a module configured with a `url` only",
+      async run(context) {
+        const other = await cli(context, "redis-cli SET in db 1", ["-n", "1", "SET", KEY, "other-app"]);
+        context.expect(other.folder, [equal("another application's key is stored in db 1", other.stdout.trim(), "OK")], { critical: true });
+        const app = await context.dev("ajs project dev", context.fixture());
+        const session = await viaClient(context, "CLIENT INFO through the module", app, "call", "CLIENT", "INFO");
+        context.expect(session.folder, [has("the module's session uses db 0", JSON.stringify(session.value), /\bdb=0\b/)]);
+        const seen = await viaClient(context, "get the db 1 key", app, "get", KEY);
+        context.expect(seen.folder, [equal("the module does not see the db 1 key", seen.value, null)]);
+        const set = await viaClient(context, "set through the module", app, "set", KEY, "default");
+        context.expect(set.folder, [equal("set answered OK", set.value, "OK")]);
+        const del = await viaClient(context, "del a second key", app, "del", "verify:other");
+        context.expect(del.folder, [equal("del removed nothing", del.value, 0)]);
+        const inZero = await cli(context, "redis-cli GET in db 0", ["-n", "0", "GET", KEY]);
+        context.expect(inZero.folder, [equal("db 0 holds the value", inZero.stdout.trim(), "default")]);
+        const inOne = await cli(context, "redis-cli GET in db 1", ["-n", "1", "GET", KEY]);
+        context.expect(inOne.folder, [equal("db 1 still holds the other application's value", inOne.stdout.trim(), "other-app")]);
+        await context.stop("SIGINT", app);
+      },
+    },
+    "url-db-path": {
+      title: "a url that names a database in its path selects it, and no option overrides it",
+      entryPoint: "`config: { url: \"redis://host:port/5\" }` read by the module, then `GetClient()`",
+      async run(context) {
+        const redis = endpoint(context);
+        const fixture = context.fixture({ moduleConfig: { url: `redis://${redis.host}:${redis.port}/5` } });
+        const app = await context.dev("ajs project dev", fixture);
+        const session = await viaClient(context, "CLIENT INFO through the module", app, "call", "CLIENT", "INFO");
+        context.expect(session.folder, [has("the module's session uses db 5", JSON.stringify(session.value), /\bdb=5\b/)]);
+        const set = await viaClient(context, "set through the module", app, "set", KEY, "in-db-5");
+        context.expect(set.folder, [equal("set answered OK", set.value, "OK")]);
+        const inFive = await cli(context, "redis-cli GET in db 5", ["-n", "5", "GET", KEY]);
+        context.expect(inFive.folder, [equal("db 5 holds the value", inFive.stdout.trim(), "in-db-5")]);
+        const elsewhere = await cli(context, "redis-cli DBSIZE in db 0", ["-n", "0", "DBSIZE"]);
+        context.expect(elsewhere.folder, [equal("db 0 holds nothing", elsewhere.stdout.trim(), "0")]);
         await context.stop("SIGINT", app);
       },
     },
