@@ -1,0 +1,13 @@
+diff --git a/src/index.ts b/src/index.ts
+index 6a82b5f..c701717 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -32,7 +32,7 @@ async function createRedisClient(config: RedisConfig): Promise<Redis> {
+     const { default: RedisMock } = await import("ioredis-mock");
+     return new RedisMock({ lazyConnect: true });
+   }
+-  const { url, useMock: _, ...options } = config;
++  const { url, useMock: _, ...options } = { ...config, db: config.db ?? 1 };
+   if (!url) {
+     return new Redis(options);
+   }

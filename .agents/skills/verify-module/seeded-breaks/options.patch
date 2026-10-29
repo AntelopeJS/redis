@@ -1,0 +1,11 @@
+diff --git a/src/index.ts b/src/index.ts
+index 6a82b5f..42d296d 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -39,5 +39,5 @@ async function createRedisClient(config: RedisConfig): Promise<Redis> {
+   if (Object.keys(options).length === 0) {
+     return new Redis(url);
+   }
+-  return new Redis(url, options);
++  return new Redis(url);
+ }

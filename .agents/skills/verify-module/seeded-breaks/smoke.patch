@@ -1,0 +1,13 @@
+diff --git a/src/index.ts b/src/index.ts
+index 6a82b5f..b31064c 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -8,7 +8,7 @@ export interface RedisConfig extends RedisOptions {
+ 
+ let redisConfig: RedisConfig;
+ export function construct(config: RedisConfig): void {
+-  redisConfig = config;
++  redisConfig = { ...config, keyPrefix: "app:" };
+ }
+ 
+ export function destroy(): void {}
