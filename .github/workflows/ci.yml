@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   ci:
-    uses: AntelopeJS/.github/.github/workflows/ci-node.yml@v1
+    uses: AntelopeJS/.github/.github/workflows/ci-node.yml@fix/ci-node-fetch-pr-base
 
   checks:
     if: always()
