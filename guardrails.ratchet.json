@@ -1,8 +1,0 @@
-{
-  "rules": {
-    "antelopejs/no-comments": 8,
-    "anti-slop/no-chained-type-assertions": 1,
-    "anti-slop/require-safety-comment-for-type-assertion": 2
-  },
-  "oversizeFiles": {}
-}

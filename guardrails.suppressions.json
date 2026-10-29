@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "import/no-extraneous-dependencies": 0
+  },
+  "tsExpectError": 0,
+  "tsIgnore": 0,
+  "safety": 0
+}
