@@ -87,6 +87,16 @@ const greeting = await client.get("greeting");
 
 ## Compatibility
 
+<!-- antelopejs-docs-compat:start -->
+
+| Package                                 | Supported        | Tested with |
+| --------------------------------------- | ---------------- | ----------- |
+| `@antelopejs/interface-core`            | `>=0.2.4 <1.0.0` | `0.2.4`     |
+| `@antelopejs/interface-redis`           | `>=0.0.9 <1.0.0` | `0.0.9`     |
+| `@antelopejs/interface-redis-scheduler` | `>=0.0.8 <1.0.0` | `0.0.8`     |
+
+<!-- antelopejs-docs-compat:end -->
+
 | Package                                 | Supported range  |
 | --------------------------------------- | ---------------- |
 | `@antelopejs/interface-redis`           | `>=0.0.9 <1.0.0` |

@@ -44,7 +44,9 @@
     "sync:check": "antelopejs-sync --check",
     "typecheck": "tsc --noEmit",
     "suppressions": "antelopejs-suppressions",
-    "suppressions:update": "antelopejs-suppressions --update"
+    "suppressions:update": "antelopejs-suppressions --update",
+    "ratchet": "antelopejs-ratchet",
+    "ratchet:update": "antelopejs-ratchet --update"
   },
   "dependencies": {
     "@antelopejs/interface-core": ">=0.2.4 <1.0.0",
@@ -55,7 +57,7 @@
   },
   "devDependencies": {
     "@antelopejs/core": "^1.16.0",
-    "@antelopejs/tooling-configs": "^0.2.12",
+    "@antelopejs/tooling-configs": "^0.2.17",
     "@types/chai": "^4.3.20",
     "@types/ioredis-mock": "^8.2.7",
     "@types/mocha": "^10.0.10",
