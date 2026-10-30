@@ -44,9 +44,7 @@
     "sync:check": "antelopejs-sync --check",
     "typecheck": "tsc --noEmit",
     "suppressions": "antelopejs-suppressions",
-    "suppressions:update": "antelopejs-suppressions --update",
-    "ratchet": "antelopejs-ratchet",
-    "ratchet:update": "antelopejs-ratchet --update"
+    "suppressions:update": "antelopejs-suppressions --update"
   },
   "dependencies": {
     "@antelopejs/interface-core": ">=0.2.4 <1.0.0",
