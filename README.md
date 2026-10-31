@@ -97,13 +97,7 @@ const greeting = await client.get("greeting");
 
 <!-- antelopejs-docs-compat:end -->
 
-| Package                                 | Supported range  |
-| --------------------------------------- | ---------------- |
-| `@antelopejs/interface-redis`           | `>=0.0.9 <1.0.0` |
-| `@antelopejs/interface-redis-scheduler` | `>=0.0.8 <1.0.0` |
-| `@antelopejs/interface-core`            | `>=0.2.4 <1.0.0` |
-
-The module is developed and tested against `@antelopejs/core` `^1.16.0` on Node.js 24, with `ioredis` `^5.10.1`.
+The module is developed and tested on Node.js 24, with `ioredis` `^5.10.1`.
 
 ## Contributing
 
