@@ -81,6 +81,9 @@
     "defaultConfig": {
       "url": "redis://localhost:6379"
     },
-    "test": "src/test/antelope.test.ts"
+    "test": "src/test/antelope.test.ts",
+    "docs": {
+      "standard": true
+    }
   }
 }
