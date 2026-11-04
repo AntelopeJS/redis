@@ -1,5 +1,40 @@
 # Changelog
 
+## v1.1.0
+
+[compare changes](https://github.com/AntelopeJS/redis/compare/v1.0.4...v1.1.0)
+
+### 🚀 Enhancements
+
+- **skills:** Add the verify-module verification skill ([#38](https://github.com/AntelopeJS/redis/pull/38))
+
+### 🩹 Fixes
+
+- **skills:** Make the verify containments catch their doors ([#39](https://github.com/AntelopeJS/redis/pull/39))
+
+### 💅 Refactors
+
+- Clean the repo with the guardrail pack ([#35](https://github.com/AntelopeJS/redis/pull/35))
+
+### 📖 Documentation
+
+- **readme:** Use one Discord invite ([#44](https://github.com/AntelopeJS/redis/pull/44))
+- **github:** Send questions and ideas to Discord ([#45](https://github.com/AntelopeJS/redis/pull/45))
+
+### 📦 Build
+
+- **deps:** Bump @antelopejs/tooling-configs to 0.2.17 ([#41](https://github.com/AntelopeJS/redis/pull/41))
+
+### 🏡 Chore
+
+- Adopt the guardrail pack from tooling-configs 0.2.0 ([#33](https://github.com/AntelopeJS/redis/pull/33))
+- Configure Renovate with the shared preset ([#34](https://github.com/AntelopeJS/redis/pull/34))
+- Land the cleanup campaign on main ([#49](https://github.com/AntelopeJS/redis/pull/49))
+
+### ❤️ Contributors
+
+- Antony Rizzitelli ([@Upd4ting](http://github.com/Upd4ting))
+
 ## v1.0.4
 
 [compare changes](https://github.com/AntelopeJS/redis/compare/v1.0.3...v1.0.4)
