@@ -1,5 +1,3 @@
-import { join } from "node:path";
-
 import {
   equal,
   exitIs,
@@ -34,7 +32,7 @@ function reconfigure(context: JourneyContext, project: string, moduleConfig: Mod
     redis: { source: { type: "local", path: context.repo }, config: moduleConfig },
     "verify-driver": { source: { type: "local", path: "./driver" } },
   };
-  context.edit("switch the module config", join(project, "antelope.config.ts"), `export default ${JSON.stringify({ name: "verify-redis", modules }, null, 2)};\n`);
+  context.edit("switch the module config", `${project}/antelope.config.ts`, `export default ${JSON.stringify({ name: "verify-redis", modules }, null, 2)};\n`);
 }
 
 function endpoint(context: JourneyContext): ServiceEndpoint {

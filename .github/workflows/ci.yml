@@ -11,13 +11,15 @@ permissions:
 
 jobs:
   ci:
-    uses: AntelopeJS/.github/.github/workflows/ci-node.yml@v1
+    uses: AntelopeJS/.github/.github/workflows/ci-node.yml@v1-campaign
     permissions:
       contents: read
     with:
       docs-files: |
         README.md
+        docs
         playground/README.md
+      docs-typescript-project: docs/tsconfig.json
       renovate-sync: false
 
   checks:
