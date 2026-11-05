@@ -21,6 +21,7 @@ jobs:
         playground/README.md
       docs-typescript-project: docs/tsconfig.json
       renovate-sync: false
+      test-job: true
 
   checks:
     if: always()
