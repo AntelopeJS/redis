@@ -13,16 +13,28 @@ export function construct(config: RedisConfig): void {
 
 export function destroy(): void {}
 
+let startedClient: Redis | undefined;
+
 export async function start(): Promise<void> {
   const client = await createRedisClient(redisConfig);
   if (redisConfig.useMock || redisConfig.lazyConnect) {
-    await client.connect();
+    try {
+      await client.connect();
+    } catch (error) {
+      client.disconnect();
+      throw error;
+    }
   }
+  startedClient = client;
   internal.SetClient(client);
 }
 
 export async function stop(): Promise<void> {
-  const client = await internal.client;
+  const client = startedClient;
+  if (!client) {
+    return;
+  }
+  startedClient = undefined;
   await client.quit();
   void internal.UnsetClient();
 }
