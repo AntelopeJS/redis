@@ -33,7 +33,7 @@
     "lint:fix": "oxlint --fix",
     "lint": "oxlint",
     "prepack": "pnpm run build",
-    "release": "pnpm run lint && pnpm run test && pnpm run prepack && release-it",
+    "release": "pnpm run typecheck && pnpm run lint && pnpm run test && pnpm run prepack && release-it",
     "test": "pnpm run build && ajs module test .",
     "format:check": "oxfmt --check .",
     "knip": "knip",
@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@antelopejs/core": "^1.21.0",
-    "@antelopejs/tooling-configs": "^0.4.0",
+    "@antelopejs/tooling-configs": "^0.5.0",
     "@types/chai": "^4.3.20",
     "@types/ioredis-mock": "^8.2.7",
     "@types/mocha": "^10.0.10",
