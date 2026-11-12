@@ -1,5 +1,38 @@
 # Changelog
 
+## v1.1.1
+
+[compare changes](https://github.com/AntelopeJS/redis/compare/v1.1.0...v1.1.1)
+
+### 🩹 Fixes
+
+- **deps:** Update tmp to resolve runtime advisories ([#53](https://github.com/AntelopeJS/redis/pull/53))
+- Settle stop() and close the client after a failed start() ([#56](https://github.com/AntelopeJS/redis/pull/56))
+
+### 📖 Documentation
+
+- **readme:** Link the package to AntelopeJS and AntelopeJS DMS ([125db75](https://github.com/AntelopeJS/redis/commit/125db75))
+
+### 📦 Build
+
+- **deps:** Bump @antelopejs packages to the 2026-11-06 releases ([#55](https://github.com/AntelopeJS/redis/pull/55))
+- **deps:** Bump @antelopejs/tooling-configs to 0.4.0 ([#57](https://github.com/AntelopeJS/redis/pull/57))
+- **deps:** Bump @antelopejs/tooling-configs to 0.5.0 ([#58](https://github.com/AntelopeJS/redis/pull/58))
+- **deps:** Bump @antelopejs/tooling-configs to 0.5.1 ([#59](https://github.com/AntelopeJS/redis/pull/59))
+
+### 🏡 Chore
+
+- **verify:** Remove seeded runs from the verification skill ([#51](https://github.com/AntelopeJS/redis/pull/51))
+- **ci:** Remove the weekly mutation caller ([#52](https://github.com/AntelopeJS/redis/pull/52))
+
+### 🤖 CI
+
+- Call ci-node.yml@v1 ([#54](https://github.com/AntelopeJS/redis/pull/54))
+
+### ❤️ Contributors
+
+- Antony Rizzitelli ([@Upd4ting](http://github.com/Upd4ting))
+
 ## v1.1.0
 
 [compare changes](https://github.com/AntelopeJS/redis/compare/v1.0.4...v1.1.0)
