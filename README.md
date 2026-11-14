@@ -43,7 +43,7 @@ export default defineConfig({
       source: {
         type: "package",
         package: "@antelopejs/redis",
-        version: "^1.0.3",
+        version: "~1.1.1",
       },
       config: {
         url: "redis://localhost:6379",
@@ -94,11 +94,11 @@ const greeting = await client.get("greeting");
 
 <!-- antelopejs-docs-compat:start -->
 
-| Package                                 | Supported        | Tested with |
-| --------------------------------------- | ---------------- | ----------- |
-| `@antelopejs/interface-core`            | `>=0.2.4 <1.0.0` | `0.4.0`     |
-| `@antelopejs/interface-redis`           | `>=0.0.9 <1.0.0` | `0.0.9`     |
-| `@antelopejs/interface-redis-scheduler` | `>=0.0.8 <1.0.0` | `0.0.8`     |
+| Package                                 | Supported         | Tested with |
+| --------------------------------------- | ----------------- | ----------- |
+| `@antelopejs/interface-core`            | `>=0.5.1 <0.6.0`  | `0.5.1`     |
+| `@antelopejs/interface-redis`           | `>=0.0.10 <0.1.0` | `0.0.10`    |
+| `@antelopejs/interface-redis-scheduler` | `>=0.0.12 <0.1.0` | `0.0.12`    |
 
 <!-- antelopejs-docs-compat:end -->
 
