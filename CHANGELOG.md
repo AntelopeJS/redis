@@ -1,5 +1,30 @@
 # Changelog
 
+## v1.1.2
+
+[compare changes](https://github.com/AntelopeJS/redis/compare/v1.1.1...v1.1.2)
+
+### 🩹 Fixes
+
+- Forward client error events to the redis log channel ([#65](https://github.com/AntelopeJS/redis/pull/65))
+
+### 📖 Documentation
+
+- **readme:** Adopt the AntelopeJS framework README style ([#60](https://github.com/AntelopeJS/redis/pull/60))
+
+### 📦 Build
+
+- **deps:** Move to tooling-configs 0.7.1 and cap @antelopejs ranges below the next minor ([#62](https://github.com/AntelopeJS/redis/pull/62))
+- Move to @antelopejs/tooling-configs 0.8 and the three-tier CI ([#63](https://github.com/AntelopeJS/redis/pull/63))
+
+### 🤖 CI
+
+- Run the check and test jobs on Windows ([#61](https://github.com/AntelopeJS/redis/pull/61))
+
+### ❤️ Contributors
+
+- Antony Rizzitelli
+
 ## v1.1.1
 
 [compare changes](https://github.com/AntelopeJS/redis/compare/v1.1.0...v1.1.1)
