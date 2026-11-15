@@ -86,8 +86,10 @@ const greeting = await client.get("greeting");
 
 ```typescript
 import { Logging } from "@antelopejs/interface-core/logging";
+import { GetClient } from "@antelopejs/interface-redis";
 
 const Logger = new Logging.Channel("my-module");
+const client = await GetClient();
 const subscriber = client.duplicate({ lazyConnect: true });
 subscriber.on("error", (error) => Logger.Warn(error));
 await subscriber.connect();
