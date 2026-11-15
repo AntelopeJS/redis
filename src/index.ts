@@ -1,5 +1,8 @@
 import Redis, { type RedisOptions } from "ioredis";
+import { Logging } from "@antelopejs/interface-core/logging";
 import { internal } from "@antelopejs/interface-redis";
+
+const Logger = new Logging.Channel("redis");
 
 export interface RedisConfig extends RedisOptions {
   url?: string;
@@ -17,6 +20,7 @@ let startedClient: Redis | undefined;
 
 export async function start(): Promise<void> {
   const client = await createRedisClient(redisConfig);
+  client.on("error", (error: Error) => Logger.Warn(error));
   if (redisConfig.useMock || redisConfig.lazyConnect) {
     try {
       await client.connect();
