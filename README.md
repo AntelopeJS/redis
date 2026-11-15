@@ -64,7 +64,7 @@ export default defineConfig({
 | `useMock`     | Serves an in-memory [`ioredis-mock`](https://github.com/stipsan/ioredis-mock) client instead of connecting, and ignores every other key. For tests only.          |
 | any other key | Passed to the client as [`ioredis` options](https://github.com/redis/ioredis#connect-to-redis), such as `host`, `port`, `password`, `db`, `tls` or `lazyConnect`. |
 
-The module creates the client when it starts, and quits it when it stops. With `lazyConnect: true`, the module waits for the connection before it serves the client.
+The module creates the client when it starts, and quits it when it stops. With `lazyConnect: true`, the module waits for the connection before it serves the client. Every `error` event of that client, such as a refused connection or an `EPIPE` on shutdown, goes to the AntelopeJS logger as a warning on the `redis` channel.
 
 ## Quick start
 
@@ -82,7 +82,20 @@ await client.set("greeting", "hello", "EX", 60);
 const greeting = await client.get("greeting");
 ```
 
-`GetClient()` waits until the module has started and set its client. For distributed jobs, add `@antelopejs/interface-redis-scheduler` and read its [documentation](https://interfaces.antelopejs.com/docs/redis-scheduler/introduction).
+`GetClient()` waits until the module has started and set its client. After the module stops, a new call waits again until the next start serves a new client, so a hot reload does not fail callers. A client you create with `client.duplicate()`, such as a pub/sub subscriber, has no `error` listener: add your own before you connect it, or ioredis prints its errors as unhandled error events.
+
+```typescript
+import { Logging } from "@antelopejs/interface-core/logging";
+import { GetClient } from "@antelopejs/interface-redis";
+
+const Logger = new Logging.Channel("my-module");
+const client = await GetClient();
+const subscriber = client.duplicate({ lazyConnect: true });
+subscriber.on("error", (error) => Logger.Warn(error));
+await subscriber.connect();
+```
+
+For distributed jobs, add `@antelopejs/interface-redis-scheduler` and read its [documentation](https://interfaces.antelopejs.com/docs/redis-scheduler/introduction).
 
 ## Documentation
 
