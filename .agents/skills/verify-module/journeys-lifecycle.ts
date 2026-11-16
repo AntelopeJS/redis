@@ -54,4 +54,19 @@ export const lifecycleJourneys: NonNullable<VerifyConfig["journeys"]> = {
         context.expect(stopped.folder, [lacks("stderr", stopped.stderr, /unhandled|ECONNRESET/i)]);
       },
     },
+    "stop-after-failed-start": {
+      title: "with lazyConnect and a refusing server the failed start does not hang the project: it ends on its own or on the first Ctrl+C, and the client stops reconnecting",
+      entryPoint: "`config: { url, lazyConnect: true }` with a closed port, then `ajs project dev` and Ctrl+C",
+      async run(context) {
+        const fixture = context.fixture({ moduleConfig: { url: "redis://127.0.0.1:1", lazyConnect: true } });
+        const run = await context.command("ajs project dev against a closed port", "ajs", ["project", "dev"], { cwd: fixture, timeoutMs: 20000 });
+        context.expect(run.folder, [
+          equal("the project ended by itself before the 20 s limit", run.signal, null),
+          equal("the project exited non-zero", run.exitCode, 1),
+          has("the start failure is reported", run.stderr, /Failed to start modules/),
+          has("the refused connection is logged", run.stdout + run.stderr, /ECONNREFUSED/),
+          equal("the client attempted one connection and never reconnected", (`${run.stdout}${run.stderr}`.match(/ECONNREFUSED/g) ?? []).length, 1),
+        ]);
+      },
+    },
 };
