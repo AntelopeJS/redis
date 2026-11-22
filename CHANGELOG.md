@@ -1,5 +1,26 @@
 # Changelog
 
+## v1.1.3
+
+[compare changes](https://github.com/AntelopeJS/redis/compare/v1.1.2...v1.1.3)
+
+### 🩹 Fixes
+
+- Promote next to main ([#68](https://github.com/AntelopeJS/redis/pull/68))
+
+### 📦 Build
+
+- **ci:** Move to the trunk CI with tooling-configs 0.8.9 ([#69](https://github.com/AntelopeJS/redis/pull/69))
+
+### 🤖 CI
+
+- Re-sync the AntelopeJS pack for the release app ([#71](https://github.com/AntelopeJS/redis/pull/71))
+- Stop forwarding the retired RELEASE_GITHUB_TOKEN ([#72](https://github.com/AntelopeJS/redis/pull/72))
+
+### ❤️ Contributors
+
+- Antony Rizzitelli
+
 ## v1.1.2
 
 [compare changes](https://github.com/AntelopeJS/redis/compare/v1.1.1...v1.1.2)
