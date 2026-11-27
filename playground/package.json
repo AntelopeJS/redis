@@ -10,7 +10,7 @@
     "@antelopejs/interface-core": ">=0.5.1 <0.6.0"
   },
   "devDependencies": {
-    "@types/node": "^20.5.7",
+    "@types/node": "^22.19.15",
     "prettier": "^2.6.1",
     "typescript": "^5.8.3"
   },
